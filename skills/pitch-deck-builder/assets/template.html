@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>{{company}} — pitch deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #6b6b6b;
+    --line: #e6e6e6;
+    --placeholder-bg: #fafafa;
+    --accent: #0a0a0a; /* swap to brand color if requested */
+  }
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometryPrecision;
+  }
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    padding: 120px 160px;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+    break-after: page;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide:last-child { page-break-after: auto; }
+
+  .num {
+    position: absolute;
+    top: 80px;
+    left: 160px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .label {
+    position: absolute;
+    top: 80px;
+    right: 160px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .footer {
+    position: absolute;
+    bottom: 80px;
+    left: 160px;
+    right: 160px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  /* Title slide */
+  .title-wrap {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .wordmark {
+    font-size: 128px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .tagline {
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+  .byline {
+    margin-top: 80px;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Generic content slide */
+  h1.head {
+    font-size: 88px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin: 0;
+    max-width: 1400px;
+  }
+  p.body {
+    font-size: 28px;
+    line-height: 1.4;
+    color: var(--ink);
+    max-width: 1100px;
+    font-weight: 400;
+    margin: 32px 0 0 0;
+  }
+  p.body.muted { color: var(--muted); }
+  .lead {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  /* Three-step row */
+  .steps {
+    display: flex;
+    gap: 80px;
+    margin-top: 80px;
+  }
+  .step {
+    flex: 1;
+    border-top: 1px solid var(--ink);
+    padding-top: 28px;
+  }
+  .step .n {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+  .step .t {
+    margin-top: 24px;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .step .d {
+    margin-top: 16px;
+    font-size: 20px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* Stat rows */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px 80px;
+    margin-top: 64px;
+  }
+  .stat {
+    border-top: 1px solid var(--ink);
+    padding-top: 24px;
+  }
+  .stat .big {
+    font-size: 64px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .stat .small {
+    margin-top: 12px;
+    font-size: 22px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Product screenshot */
+  .img-ph {
+    margin-top: 56px;
+    flex: 1;
+    border: 1px dashed #cccccc;
+    border-radius: 4px;
+    background: var(--placeholder-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b3b3b3;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  img.product-shot {
+    margin-top: 56px;
+    flex: 1;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: var(--placeholder-bg);
+    border-radius: 4px;
+  }
+
+  /* Competition 2x2 */
+  .grid2x2 {
+    margin-top: 56px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-template-rows: 60px 1fr 1fr;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  .grid2x2 > div {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 24px 28px;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .axis-h, .axis-v {
+    background: #ffffff;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .axis-corner { background: #ffffff; border-right: 1px solid var(--ink) !important; }
+  .cell-name { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
+  .cell-desc { font-size: 18px; color: var(--muted); margin-top: 10px; line-height: 1.35; }
+  .cell-us { background: #ffffff; }
+  .cell-us .cell-name::after { content: " \2190"; color: var(--accent); }
+
+  /* Contact */
+  .contact-list {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .contact-list .line {
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .contact-list .line + .line { margin-top: 28px; }
+
+  .todo {
+    color: #b3b3b3;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 Title -->
+<section class="slide">
+  <div class="num">01</div>
+  <div class="label">Pitch Deck · {{year}}</div>
+  <div class="title-wrap">
+    <div class="wordmark">{{company}}</div>
+    <div class="tagline">{{tagline}}</div>
+    <div class="byline">{{founder_byline}}</div>
+  </div>
+  <div class="footer">
+    <span>{{website}}</span>
+    <span>{{year}}</span>
+  </div>
+</section>
+
+<!-- 02 Problem -->
+<section class="slide">
+  <div class="num">02</div>
+  <div class="label">Problem</div>
+  <div class="lead">
+    <h1 class="head">{{problem_headline}}</h1>
+    <p class="body muted">{{problem_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>02 / 12</span></div>
+</section>
+
+<!-- 03 Solution -->
+<section class="slide">
+  <div class="num">03</div>
+  <div class="label">Solution</div>
+  <div class="lead">
+    <h1 class="head">{{solution_headline}}</h1>
+    <p class="body muted">{{solution_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>03 / 12</span></div>
+</section>
+
+<!-- 04 How it works -->
+<section class="slide">
+  <div class="num">04</div>
+  <div class="label">How it works</div>
+  <h1 class="head">{{how_headline}}</h1>
+  <div class="steps">
+    <div class="step">
+      <div class="n">01</div>
+      <div class="t">{{step1_title}}</div>
+      <div class="d">{{step1_detail}}</div>
+    </div>
+    <div class="step">
+      <div class="n">02</div>
+      <div class="t">{{step2_title}}</div>
+      <div class="d">{{step2_detail}}</div>
+    </div>
+    <div class="step">
+      <div class="n">03</div>
+      <div class="t">{{step3_title}}</div>
+      <div class="d">{{step3_detail}}</div>
+    </div>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>04 / 12</span></div>
+</section>
+
+<!-- 05 Product -->
+<section class="slide">
+  <div class="num">05</div>
+  <div class="label">Product</div>
+  <h1 class="head">{{product_headline}}</h1>
+  <!-- IF the user supplied a screenshot, replace the next line with: -->
+  <!-- <img class="product-shot" src="file:///absolute/path/to/screenshot.png" alt="Product screenshot" /> -->
+  <div class="img-ph">Product screenshot · {{product_caption}}</div>
+  <div class="footer"><span>{{company}}</span><span>05 / 12</span></div>
+</section>
+
+<!-- 06 Market -->
+<section class="slide">
+  <div class="num">06</div>
+  <div class="label">Market</div>
+  <div class="lead">
+    <h1 class="head">{{market_headline}}</h1>
+    <p class="body muted">{{market_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>06 / 12</span></div>
+</section>
+
+<!-- 07 Business model -->
+<section class="slide">
+  <div class="num">07</div>
+  <div class="label">Business model</div>
+  <div class="lead">
+    <h1 class="head">{{model_headline}}</h1>
+    <p class="body muted">{{model_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>07 / 12</span></div>
+</section>
+
+<!-- 08 Traction -->
+<section class="slide">
+  <div class="num">08</div>
+  <div class="label">Traction</div>
+  <h1 class="head">{{traction_headline}}</h1>
+  <div class="stats">
+    <div class="stat">
+      <div class="big">{{stat1_big}}</div>
+      <div class="small">{{stat1_small}}</div>
+    </div>
+    <div class="stat">
+      <div class="big">{{stat2_big}}</div>
+      <div class="small">{{stat2_small}}</div>
+    </div>
+    <div class="stat">
+      <div class="big">{{stat3_big}}</div>
+      <div class="small">{{stat3_small}}</div>
+    </div>
+    <div class="stat">
+      <div class="big">{{stat4_big}}</div>
+      <div class="small">{{stat4_small}}</div>
+    </div>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>08 / 12</span></div>
+</section>
+
+<!-- 09 Competition -->
+<section class="slide">
+  <div class="num">09</div>
+  <div class="label">Competition</div>
+  <h1 class="head">{{comp_headline}}</h1>
+  <div class="grid2x2">
+    <div class="axis-corner"></div>
+    <div class="axis-h">{{axis_h_left}}</div>
+    <div class="axis-h">{{axis_h_right}}</div>
+
+    <div class="axis-v">{{axis_v_top}}</div>
+    <div>
+      <div class="cell-name">{{cell_tl_name}}</div>
+      <div class="cell-desc">{{cell_tl_desc}}</div>
+    </div>
+    <div class="cell-us">
+      <div class="cell-name">{{company}}</div>
+      <div class="cell-desc">{{cell_us_desc}}</div>
+    </div>
+
+    <div class="axis-v">{{axis_v_bottom}}</div>
+    <div>
+      <div class="cell-name">{{cell_bl_name}}</div>
+      <div class="cell-desc">{{cell_bl_desc}}</div>
+    </div>
+    <div>
+      <div class="cell-name">{{cell_br_name}}</div>
+      <div class="cell-desc">{{cell_br_desc}}</div>
+    </div>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>09 / 12</span></div>
+</section>
+
+<!-- 10 Why now -->
+<section class="slide">
+  <div class="num">10</div>
+  <div class="label">Why now</div>
+  <div class="lead">
+    <h1 class="head">{{whynow_headline}}</h1>
+    <p class="body muted">{{whynow_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>10 / 12</span></div>
+</section>
+
+<!-- 11 Ask -->
+<section class="slide">
+  <div class="num">11</div>
+  <div class="label">The ask</div>
+  <div class="lead">
+    <h1 class="head">{{ask_headline}}</h1>
+    <p class="body muted">{{ask_detail}}</p>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>11 / 12</span></div>
+</section>
+
+<!-- 12 Contact -->
+<section class="slide">
+  <div class="num">12</div>
+  <div class="label">Contact</div>
+  <div class="contact-list">
+    <div class="line">{{contact_name}}</div>
+    <div class="line">{{contact_email}}</div>
+    <div class="line">{{website}}</div>
+    <div class="line">{{contact_extra}}</div>
+  </div>
+  <div class="footer"><span>{{company}}</span><span>12 / 12</span></div>
+</section>
+
+</body>
+</html>
