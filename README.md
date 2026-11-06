@@ -2,13 +2,14 @@
 
 Aditya's Claude Code skill pack. Opinionated tools that turn Claude into a sharper collaborator — one skill at a time.
 
-This repo starts with one skill and will grow. Each skill is self-contained: drop it into `~/.claude/skills/` and Claude Code picks it up automatically.
+This repo contains a growing collection of skills. Each skill is self-contained: drop it into `~/.claude/skills/` and Claude Code picks it up automatically.
 
 ## Skills
 
 | Skill | What it does |
 |---|---|
 | [`pitch-deck-builder`](skills/pitch-deck-builder/) | Generates a clean, minimalist, investor-ready 12-slide pitch deck as a 16:9 PDF. Black-on-white, Inter typography, no fluff. HTML-first → headless Chromium → PDF. |
+| [`git-safe-sync`](skills/git-safe-sync/) | Fetches and compares Git history before syncing, preserves local work, and resolves conflicts using the user’s approved strategy. |
 
 ## Install
 
